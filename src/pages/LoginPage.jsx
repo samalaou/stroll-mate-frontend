@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { TextField, Button, Typography, Paper, Snackbar, Box } from "@mui/material";
-import { AuthContext } from "../context/auth.context";
+import { useState, useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button } from '@mui/material';
+import { AuthContext } from '../context/auth.context';
+import CenteredPaper from '../components/CenteredPaper';
 
 const API_URL = "http://localhost:5005";
 
@@ -40,64 +41,47 @@ function LoginPage() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '50vh',
-      }}
+    <CenteredPaper
+      title="Login"
+      linkText="Don't have an account yet?"
+      linkTo="/signup"
+      linkTitle="Sign up"
+      openSnackbar={openSnackbar}
+      errorMessage={errorMessage}
+      handleCloseSnackbar={handleCloseSnackbar}
     >
-      <Paper elevation={3} sx={{ padding: 3, maxWidth: 400, width: '100%' }}>
-        <Typography variant="h5" align="center" gutterBottom>
-          Login
-        </Typography>
-
-        <form onSubmit={handleLoginSubmit} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={handleEmail}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Password"
-            type="password"
-            value={password}
-            onChange={handlePassword}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-          >
-            Login
-          </Button>
-        </form>
-
-        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          Don't have an account yet?{" "}
-          <Link to="/signup">Sign Up</Link>
-        </Typography>
-
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          message={errorMessage}
+      <form onSubmit={handleLoginSubmit} noValidate>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          label="Email"
+          type="email"
+          value={email}
+          onChange={handleEmail}
         />
-      </Paper>
-    </Box>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          label="Password"
+          type="password"
+          value={password}
+          onChange={handlePassword}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+        >
+          Login
+        </Button>
+      </form>
+    </CenteredPaper>
   );
 }
 

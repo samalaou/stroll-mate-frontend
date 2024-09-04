@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { TextField, Button, Typography, Paper, Snackbar, Box } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import CenteredPaper from "../components/CenteredPaper";
 
 const API_URL = "http://localhost:5005";
 
@@ -39,74 +40,57 @@ function SignupPage() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '50vh',
-      }}
+    <CenteredPaper
+      title="Sign Up"
+      linkText="Already have an account?"
+      linkTo="/login"
+      linkTitle="Login"
+      openSnackbar={openSnackbar}
+      errorMessage={errorMessage}
+      handleCloseSnackbar={handleCloseSnackbar}
     >
-      <Paper elevation={3} sx={{ padding: 3, maxWidth: 400, width: '100%' }}>
-        <Typography variant="h5" align="center" gutterBottom>
-          Sign Up
-        </Typography>
-
-        <form onSubmit={handleSignupSubmit} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={handleEmail}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Password"
-            type="password"
-            value={password}
-            onChange={handlePassword}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Name"
-            type="text"
-            value={name}
-            onChange={handleName}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-          >
-            Sign Up
-          </Button>
-        </form>
-
-        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          Already have an account?{" "}
-          <Link to="/login">Login</Link>
-        </Typography>
-
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          message={errorMessage}
+      <form onSubmit={handleSignupSubmit} noValidate>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          label="Email"
+          type="email"
+          value={email}
+          onChange={handleEmail}
         />
-      </Paper>
-    </Box>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          label="Password"
+          type="password"
+          value={password}
+          onChange={handlePassword}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          label="Name"
+          type="text"
+          value={name}
+          onChange={handleName}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+        >
+          Sign Up
+        </Button>
+      </form>
+    </CenteredPaper>
   );
 }
 
