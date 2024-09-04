@@ -23,9 +23,9 @@ function Navbar() {
               <MessageIcon />
             </Button>
             <Button color="inherit" onClick={logOutUser}>Logout</Button>
-            <Typography variant="body1" sx={{ marginLeft: 2 }}>
-              {user && user.name}
-            </Typography>
+            <Button component={Link} to={`/profile/${user._id}`} color="inherit" sx={{ marginLeft: 2 }}>
+                {user.name}
+            </Button>
           </>
         ) : (
           <>
