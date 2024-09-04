@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material';
 
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
+import InboxPage from './pages/InboxPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
@@ -21,6 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/inbox" element={<InboxPage />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/signup" element={ <SignupPage /> } />
         <Route path="/login" element={ <LoginPage /> } />

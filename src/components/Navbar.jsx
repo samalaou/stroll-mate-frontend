@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import MessageIcon from '@mui/icons-material/Message';
+
 import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
@@ -17,6 +19,9 @@ function Navbar() {
 
         {isLoggedIn ? (
           <>
+            <Button component={Link} to="/inbox" color="inherit">
+              <MessageIcon />
+            </Button>
             <Button color="inherit" onClick={logOutUser}>Logout</Button>
             <Typography variant="body1" sx={{ marginLeft: 2 }}>
               {user && user.name}
