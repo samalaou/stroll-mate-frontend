@@ -4,6 +4,8 @@ import { CssBaseline } from '@mui/material';
 
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
+import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage';
 
 const theme = createTheme({
   palette: {
@@ -18,6 +20,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/*" element={<ErrorPage />} />
+            <Route path="/signup" element={ <SignupPage /> } />
+            <Route path="/login" element={ <LoginPage /> } />
           </Routes> 
     </ThemeProvider>
   );
