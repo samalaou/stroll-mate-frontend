@@ -1,11 +1,9 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import { AuthContext } from '../context/auth.context';
 import CenteredPaper from '../components/CenteredPaper';
-
-const API_URL = "http://localhost:5005";
+import authService from '../services/auth.service';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -23,7 +21,7 @@ function LoginPage() {
     e.preventDefault();
     const requestBody = { email, password };
 
-    axios.post(`${API_URL}/auth/login`, requestBody)
+    authService.login(requestBody)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();

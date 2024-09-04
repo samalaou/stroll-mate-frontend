@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import CenteredPaper from "../components/CenteredPaper";
-
-const API_URL = "http://localhost:5005";
+import authService from "../services/auth.service";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -23,7 +21,7 @@ function SignupPage() {
     e.preventDefault();
     const requestBody = { email, password, name };
 
-    axios.post(`${API_URL}/auth/signup`, requestBody)
+    authService.signup(requestBody)
       .then((response) => {
         console.log(response);
         navigate('/login');
