@@ -20,6 +20,7 @@ function AuthProviderWrapper(props) {
     if (storedToken) {
         authService.verify()
         .then((response) => {
+            console.log(response.data)
             const user = response.data;
             setIsLoggedIn(true);
             setIsLoading(false);

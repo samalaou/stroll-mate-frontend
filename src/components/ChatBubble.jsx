@@ -1,8 +1,6 @@
 import { Box, ListItemText, ListItem } from '@mui/material';
 
-function ChatBubble({ message }) {
-    const isUserMessage = message.from.username === 'Me';
-
+function ChatBubble({ message, isUserMessage }) {
     return (
         <ListItem
             sx={{ display: 'flex', justifyContent: isUserMessage ? 'flex-end' : 'flex-start' }}
@@ -16,7 +14,7 @@ function ChatBubble({ message }) {
                     textAlign: isUserMessage ? 'right' : 'left'
                 }}
             >
-                <ListItemText primary={message.text} />
+                <ListItemText primary={message} />
             </Box>
         </ListItem>
     );

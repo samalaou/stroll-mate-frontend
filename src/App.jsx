@@ -24,7 +24,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/inbox" element={<InboxPage />} />
+        <Route path="/inbox" element={<IsPrivate> <InboxPage/> </IsPrivate>} />
         <Route path="/profile/:userId" element={<IsPrivate> <UserPage/> </IsPrivate>} />
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/signup" element={ <SignupPage /> } />
