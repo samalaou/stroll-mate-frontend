@@ -49,6 +49,10 @@ function InboxPage() {
             };
             const response = await messageService.createMessage(requestBody);
             console.log('Message sent:', response.data);
+            setMessages(prevMessages => [
+                ...prevMessages,
+                response.data
+            ]);
         } catch (error) {
             console.error('Failed to send message:', error);
         }
