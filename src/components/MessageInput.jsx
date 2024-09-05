@@ -6,8 +6,17 @@ function MessageInput({ onSend }) {
     const [message, setMessage] = useState('');
 
     const handleSend = () => {
-        onSend(message);
-        setMessage('');
+        if (message.trim()) {
+            onSend(message);
+            setMessage('');
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSend();
+        }
     };
 
     return (
@@ -25,6 +34,7 @@ function MessageInput({ onSend }) {
                 size="small"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Type a message..."
             />
             <IconButton color="primary" onClick={handleSend}>
