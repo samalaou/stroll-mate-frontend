@@ -1,10 +1,9 @@
-import { Typography, Box, List } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from "../context/auth.context";
 import messageService from '../services/message.service';
 import ChatList from '../components/ChatList';
-import ChatBubble from '../components/ChatBubble';
-import MessageInput from '../components/MessageInput';
+import Chat from '../components/Chat';
 
 function InboxPage() {
     const { user } = useContext(AuthContext);
@@ -38,8 +37,7 @@ function InboxPage() {
             })();
         }
     }, [selectedUser, user._id]);
-    
-    
+
     const handleSendMessage = async (messageText) => {
         try {
             const requestBody = {
@@ -57,7 +55,7 @@ function InboxPage() {
             console.error('Failed to send message:', error);
         }
     };
-    
+
     return (
         <Box display="flex" flexDirection="row" height="100vh">
             <Box flex={1} p={2} borderRight={1} borderColor="divider" display="flex" flexDirection="column">
@@ -69,26 +67,15 @@ function InboxPage() {
             </Box>
             <Box flex={3} p={2} display="flex" flexDirection="column" height="100%">
                 {selectedUser ? (
-                    <>
-                        {error ? (
-                            <Typography color="error">{error}</Typography>
-                        ) : (
-                            <Box display="flex" flexDirection="column" flex={1}>
-                                <List sx={{ flexGrow: 1, overflowY: 'auto', padding: 0 }}>
-                                    {messages.map(message => (
-                                        <ChatBubble 
-                                            key={message._id}
-                                            isUserMessage={message.from._id == user._id}
-                                            message={message.text}
-                                        />
-                                    ))}
-                                </List>
-                                <Box position="sticky" bottom={0} width="100%">
-                                    <MessageInput onSend={handleSendMessage} />
-                                </Box>
-                            </Box>
-                        )}
-                    </>
+                    error ? (
+                        <Typography color="error">{error}</Typography>
+                    ) : (
+                        <Chat
+                            messages={messages}
+                            user={user}
+                            onSendMessage={handleSendMessage}
+                        />
+                    )
                 ) : (
                     <Typography variant="h6" color="textSecondary">
                         Select a user to view messages.
