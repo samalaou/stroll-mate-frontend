@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import PageHeader from '../components/PageHeader';
+import WalksOverview from '../components/WalksOverview';
 
 function Homepage() {
     return (
@@ -7,6 +8,7 @@ function Homepage() {
             <PageHeader
                 title="Home"
             />
+            <WalksOverview/>
         </Container>
     );
 }
