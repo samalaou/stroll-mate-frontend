@@ -1,14 +1,14 @@
 import { Container } from '@mui/material';
 import PageHeader from '../components/PageHeader';
-import WalksOverview from '../components/WalksOverview';
+import Map from '../components/Map';
 
 function Homepage() {
     return (
         <Container component="main">
             <PageHeader
-                title="Home"
+                title="Generate Walk Itinerary"
             />
-            <WalksOverview/>
+            <Map/>
         </Container>
     );
 }
