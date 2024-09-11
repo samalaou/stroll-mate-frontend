@@ -17,6 +17,10 @@ function Navbar() {
           </Button>
         </Typography>
 
+        <Button component={Link} to="/walks" color="inherit" sx={{ marginLeft: 2 }}>
+          Walk History
+        </Button>
+
         {isLoggedIn ? (
           <>
             <Button component={Link} to="/inbox" color="inherit">

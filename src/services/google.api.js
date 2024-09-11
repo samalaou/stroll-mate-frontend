@@ -8,7 +8,7 @@ class GoogleService {
       });
   
       this.api.interceptors.request.use(config => {
-        const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+        const apiKey = 'AIzaSyAVyqwVLVp8xqyW-4_kSrq_nEzCcQKIOZc';
   
         if (apiKey) {
           config.params = { ...config.params, key: apiKey };

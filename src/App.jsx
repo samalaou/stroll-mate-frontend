@@ -8,6 +8,7 @@ import InboxPage from './pages/InboxPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage'; 
+import WalksPage from './pages/WalksPage';
 import Navbar from './components/Navbar';
 import IsPrivate from './components/IsPrivate';
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/signup" element={ <SignupPage /> } />
         <Route path="/login" element={ <LoginPage /> } />
+        <Route path="/walks" element={ <WalksPage /> } />
       </Routes> 
     </ThemeProvider>
   );

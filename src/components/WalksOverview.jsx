@@ -6,6 +6,7 @@ import { Container, Typography, Box, Button, Alert } from '@mui/material';
 import CostumDialog from './CostumDialog';
 import walksService from '../services/walks.service';
 import { AuthContext } from "../context/auth.context";
+import PageHeader from './PageHeader';
 
 const WalksOverview = () => {
     const [walks, setWalks] = useState([]);
@@ -58,7 +59,7 @@ const WalksOverview = () => {
 
     return (
         <Container>
-            <Typography variant="h3" component="h1">Walks Overview</Typography>
+            <PageHeader title="Walks Overview"/>
             {isLoggedIn &&
             <>
                 <Button variant="contained" onClick={() => handleDialogOpen()}>Add New Walk</Button>
