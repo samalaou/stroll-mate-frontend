@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
-const WalksForm = ({ onSubmit, walk }) => {
+const WalksForm = ({ onSubmit, walk, buttonTitle }) => {
   const [currentWalk, setCurrentWalk] = useState(walk);
 
   const handleSubmit = (e) => {
@@ -53,7 +53,7 @@ const WalksForm = ({ onSubmit, walk }) => {
       </Box>
 
       <Button type="submit" fullWidth variant="contained">
-        Add Walk
+        {buttonTitle}
       </Button>
     </Box>
   );

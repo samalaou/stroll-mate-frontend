@@ -22,6 +22,7 @@ const UpdateWalk = ({ onUpdateWalk, walk }) => {
     <WalksForm
         onSubmit={handleSubmit}
         walk={walk}
+        buttonTitle={'Update walk'}
     />
   );
 };

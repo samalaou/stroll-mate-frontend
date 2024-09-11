@@ -31,6 +31,7 @@ const AddWalk = ({ onAddWalk }) => {
             endPoint: '',
             durationInMinutes: '',
           }}
+        buttonTitle={'Add walk'}
     />
   );
 };
