@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import WalkItem from './WalkItem';
 import AddWalk from './AddWalk';
 import UpdateWalk from './UpdateWalk';
-import { Container, Typography, Box, Button, Alert } from '@mui/material';
+import { Container, Box, Button, Alert } from '@mui/material';
 import CostumDialog from './CostumDialog';
 import walksService from '../services/walks.service';
 import { AuthContext } from "../context/auth.context";

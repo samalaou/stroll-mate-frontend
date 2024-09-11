@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import PageHeader from '../components/PageHeader';
-import Map from '../components/Map';
+import HomeMap from '../components/HomeMap';
 
 function Homepage() {
     return (
@@ -8,7 +8,7 @@ function Homepage() {
             <PageHeader
                 title="Generate Walk Itinerary"
             />
-            <Map/>
+            <HomeMap/>
         </Container>
     );
 }

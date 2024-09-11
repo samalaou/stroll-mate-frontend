@@ -1,8 +1,11 @@
 import { Card, CardContent, Typography } from '@mui/material';
 
-const WalkDetails = ({ walk }) => {
+const WalkDetails = ({ walk, onClick }) => {
   return (
-    <Card >
+    <Card 
+      onClick={() => onClick(walk)}
+      sx={{ cursor: 'pointer' }}
+    >
       <CardContent>
         <Typography variant="h5" component="div">
           Walk from {walk.startingPoint} to {walk.endPoint}
