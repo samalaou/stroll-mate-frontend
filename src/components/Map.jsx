@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -6,7 +6,8 @@ import TextField from '@mui/material/TextField';
 import googleService from '../services/google.api';
 import { generateRectangle } from '../utils/utils';
 import { mapContainerStyle } from '../styles/style';
-
+import { AuthContext } from "../context/auth.context";
+import AddWalk from './AddWalk';
 
 const Map = () => {
   const [directionsResponse, setDirectionsResponse] = useState(null);
@@ -15,6 +16,9 @@ const Map = () => {
     lat: 52.520008,
     lng: 13.404954,
   }); // Default center is Berlin
+  const [walkGenerated, setWalkGenerated] = useState(false);
+  const [showAddWalk, setShowAddWalk] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const autocompleteRef = useRef(null);
 
   useEffect(() => {
@@ -79,10 +83,16 @@ const Map = () => {
     directionsService.route(request, (result, status) => {
       if (status === window.google.maps.DirectionsStatus.OK) {
         setDirectionsResponse(result);
+        setWalkGenerated(true);
       } else {
         console.log('Error fetching directions');
       }
     });
+  };
+
+  const handleAddWalk = (newWalk) => {
+    console.log('New walk added:', newWalk);
+    setShowAddWalk(false);
   };
 
   return (
@@ -113,6 +123,23 @@ const Map = () => {
           >
             Generate Itinerary
           </Button>
+          {isLoggedIn && walkGenerated && (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setShowAddWalk(true)}
+              >
+                Save Walk
+              </Button>
+              {showAddWalk && (
+                <AddWalk
+                  onAddWalk={handleAddWalk}
+                  startingPoint={startLocation}
+                />
+              )}
+            </>
+          )}
         </Box>
       </Box>
     </Box>

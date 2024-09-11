@@ -3,7 +3,7 @@ import { AuthContext } from "../context/auth.context";
 import walksService from '../services/walks.service';
 import WalksForm from './WalksForm';
 
-const AddWalk = ({ onAddWalk }) => {
+const AddWalk = ({ onAddWalk, startingPoint }) => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = async (walk) => {
@@ -15,23 +15,21 @@ const AddWalk = ({ onAddWalk }) => {
 
     try {
       const response = await walksService.createWalk(walkData);
-      // change the backend response ?
       onAddWalk({...response.data, user: {_id: user._id, name: user.name}});
     } catch (error) {
       console.error('Error creating walk:', error);
     }
   };
 
-
   return (
     <WalksForm
-        onSubmit={handleSubmit}
-        walk={{
-            startingPoint: '',
-            endPoint: '',
-            durationInMinutes: '',
-          }}
-        buttonTitle={'Add walk'}
+      onSubmit={handleSubmit}
+      walk={{
+        startingPoint: startingPoint || '',
+        endPoint: '',
+        durationInMinutes: '',
+      }}
+      buttonTitle={'Add walk'}
     />
   );
 };
