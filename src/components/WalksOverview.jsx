@@ -79,7 +79,7 @@ const WalksOverview = () => {
             {error && <Alert severity="error">{error}</Alert>}
 
             <Box mt={4}>
-                {walks.map((walk) => (
+                {walks.slice().reverse().map((walk) => (
                     <WalkItem
                         key={walk._id}
                         walk={walk}
