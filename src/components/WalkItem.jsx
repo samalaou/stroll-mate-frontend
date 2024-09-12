@@ -26,12 +26,16 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
         setDialogOpen(false);
     };
 
+    const isOwner = isLoggedIn && user?._id === walk.user._id;
+
     return (
         <Paper
-            sx={{ 
-                marginBottom: 2,
-                position: 'relative',
-            }}
+        sx={{ 
+            marginBottom: 2,
+            position: 'relative',
+            cursor: isOwner ? 'pointer' : 'default',
+            pointerEvents: isOwner ? 'auto' : 'none'
+        }}
         >
             {walk.rectangle && walk.rectangle.length > 0 && (
                 <>
@@ -53,7 +57,7 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
                 </>
             )}
             
-            {isLoggedIn && user?._id === walk.user._id && (
+            {isLoggedIn && isOwner && (
                 <IconButton 
                     onClick={handleDeleteClick} 
                     color="secondary"
@@ -63,7 +67,7 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
                 </IconButton>
             )}
             
-            <WalkDetails walk={walk} onClick={onClick} />
+            <WalkDetails walk={walk} onClick={isOwner ? onClick : undefined} />
         </Paper>
     );
 };
