@@ -145,7 +145,9 @@ const HomeMap = () => {
                 <AddWalk
                   onAddWalk={handleAddWalk}
                   startingPoint={startLocation}
+                  endPoint={startLocation}
                   rectangle={generatedRect}
+                  readOnly={true} 
                 />
               </CostumDialog>
             </>

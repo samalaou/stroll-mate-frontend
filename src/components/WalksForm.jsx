@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
-const WalksForm = ({ onSubmit, walk, buttonTitle }) => {
+const WalksForm = ({ onSubmit, walk, buttonTitle, readOnly }) => {
   const [currentWalk, setCurrentWalk] = useState(walk);
 
   const handleSubmit = (e) => {
@@ -27,16 +27,18 @@ const WalksForm = ({ onSubmit, walk, buttonTitle }) => {
           name="startingPoint"
           value={currentWalk.startingPoint}
           onChange={handleChange}
+          disabled={readOnly}
         />
       </Box>
 
       <Box mb={2}>
         <TextField
           fullWidth
-          label="End Point (optional)"
+          label="End Point"
           name="endPoint"
           value={currentWalk.endPoint}
           onChange={handleChange}
+          disabled={readOnly}
         />
       </Box>
 

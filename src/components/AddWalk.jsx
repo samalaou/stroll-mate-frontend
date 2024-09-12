@@ -3,14 +3,14 @@ import { AuthContext } from "../context/auth.context";
 import walksService from '../services/walks.service';
 import WalksForm from './WalksForm';
 
-const AddWalk = ({ onAddWalk, startingPoint, rectangle }) => {
+const AddWalk = ({ onAddWalk, startingPoint, endPoint, rectangle, readOnly }) => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = async (walk) => {
     const walkData = {
       ...walk,
-      startingPoint,
-      endPoint: walk.endPoint || walk.startingPoint,
+      startingPoint: walk.startingPoint || startingPoint,
+      endPoint: walk.endPoint || endPoint,
       durationInMinutes: parseInt(walk.durationInMinutes),
       ...(rectangle && { rectangle }),
     };
@@ -28,10 +28,11 @@ const AddWalk = ({ onAddWalk, startingPoint, rectangle }) => {
       onSubmit={handleSubmit}
       walk={{
         startingPoint: startingPoint || '',
-        endPoint: '',
+        endPoint: endPoint || '',
         durationInMinutes: '',
       }}
       buttonTitle={'Add Walk'}
+      readOnly={readOnly}
     />
   );
 };
