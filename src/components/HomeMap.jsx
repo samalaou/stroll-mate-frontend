@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import googleService from '../services/google.api';
-import { generateRectangle } from '../utils/utils';
+import { generateRectangle, getDirections } from '../utils/utils';
 import { AuthContext } from "../context/auth.context";
 import AddWalk from './AddWalk';
 import CostumDialog from './CostumDialog';
@@ -23,7 +23,7 @@ const HomeMap = () => {
   const autocompleteRef = useRef(null);
 
   useEffect(() => {
-    const autocomplete = new window.google.maps.places.Autocomplete(
+    const autocomplete = new google.maps.places.Autocomplete(
       autocompleteRef.current,
       { types: ['address'] }
     );
@@ -66,30 +66,15 @@ const HomeMap = () => {
   
     const distance = 1; // Distance for rectangle
     const newRect = generateRectangle(location, distance);
-  
-    const directionsService = new window.google.maps.DirectionsService();
-  
-    const request = {
-      origin: new window.google.maps.LatLng(newRect[0][0], newRect[0][1]),
-      destination: new window.google.maps.LatLng(newRect[0][0], newRect[0][1]),
-      waypoints: newRect.slice(1).map((point) => ({
-        location: new window.google.maps.LatLng(point[0], point[1]),
-        stopover: false,
-      })),
-      travelMode: 'WALKING',
-      unitSystem: window.google.maps.UnitSystem.METRIC,
-      optimizeWaypoints: true,
-    };
-  
-    directionsService.route(request, (result, status) => {
-      if (status === window.google.maps.DirectionsStatus.OK) {
-        setDirectionsResponse(result);
-        setWalkGenerated(true);
-        setGeneratedRect(newRect);
-      } else {
-        console.log('Error fetching directions');
-      }
-    });
+    setGeneratedRect(newRect);
+
+    try {
+      const directions = await getDirections(newRect);
+      setDirectionsResponse(directions);
+      setWalkGenerated(true);
+    } catch (error) {
+      console.log('Error fetching directions:', error);
+    }
   };
   
   const handleAddWalk = (newWalk) => {
