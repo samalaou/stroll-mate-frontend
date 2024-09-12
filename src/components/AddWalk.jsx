@@ -8,7 +8,6 @@ const AddWalk = ({ onAddWalk, startingPoint, endPoint, rectangle, readOnly }) =>
 
   const handleSubmit = async (walk) => {
     const walkData = {
-      ...walk,
       startingPoint: walk.startingPoint || startingPoint,
       endPoint: walk.endPoint || endPoint,
       durationInMinutes: parseInt(walk.durationInMinutes),
