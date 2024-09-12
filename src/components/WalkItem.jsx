@@ -9,9 +9,9 @@ import CostumDialog from './CostumDialog';
 import { AuthContext } from "../context/auth.context";
 
 const WalkItem = ({ walk, onClick, onDelete }) => {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, user } = useContext(AuthContext);
     const [dialogOpen, setDialogOpen] = useState(false);
-
+    
     const handleDeleteClick = (e) => {
         e.stopPropagation();
         onDelete(walk._id);
@@ -52,7 +52,8 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
                     </CostumDialog>
                 </>
             )}
-            {isLoggedIn && (
+            
+            {isLoggedIn && user?._id === walk.user._id && (
                 <IconButton 
                     onClick={handleDeleteClick} 
                     color="secondary"
