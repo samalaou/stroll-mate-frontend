@@ -1,39 +1,53 @@
-import axios from 'axios';
-
-
 class GoogleService {
-    constructor() {
-      this.api = axios.create({
-        baseURL: 'https://maps.googleapis.com/maps/api',
-      });
-  
-      this.api.interceptors.request.use(config => {
-        const apiKey = 'AIzaSyAVyqwVLVp8xqyW-4_kSrq_nEzCcQKIOZc';
-  
-        if (apiKey) {
-          config.params = { ...config.params, key: apiKey };
+  constructor() {
+    this.geocoder = new google.maps.Geocoder();
+    this.directionsService = new google.maps.DirectionsService();
+  }
+
+  async getCoordinates(address) {
+    return new Promise((resolve, reject) => {
+      this.geocoder.geocode({ address }, (results, status) => {
+        if (status === 'OK') {
+          const location = results[0]?.geometry?.location;
+          if (location) {
+            const lat = location.lat();
+            const lng = location.lng();
+            resolve({ lat, lng });
+          } else {
+            resolve(null);
+          }
+        } else {
+          reject(new Error(`Geocode was not successful: ${status}`));
         }
-  
-        return config;
       });
-    }
-  
-    async getCoordinates(address) {
-      try {
-        const response = await this.api.get('/geocode/json', {
-          params: {
-            address,
-          },
-        });
-  
-        return response.data.results[0]?.geometry?.location;
-      } catch (error) {
-        console.error('Error fetching coordinates:', error);
-        return null;
-      }
-    }
+    });
   }
   
-  const googleService = new GoogleService
 
-  export default googleService
+  async getDirections(rectangle) {
+    return new Promise((resolve, reject) => {
+      const request = {
+        origin: new google.maps.LatLng(rectangle[0][0], rectangle[0][1]),
+        destination: new google.maps.LatLng(rectangle[0][0], rectangle[0][1]),
+        waypoints: rectangle.slice(1).map((point) => ({
+          location: new google.maps.LatLng(point[0], point[1]),
+          stopover: false,
+        })),
+        travelMode: 'WALKING',
+        unitSystem: google.maps.UnitSystem.METRIC,
+        optimizeWaypoints: true,
+      };
+
+      this.directionsService.route(request, (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          resolve(result);
+        } else {
+          reject(new Error('Error fetching directions'));
+        }
+      });
+    });
+  }
+}
+
+const googleService = new GoogleService();
+export default googleService;

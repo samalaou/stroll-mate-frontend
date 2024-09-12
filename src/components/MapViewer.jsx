@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import googleService from '../services/google.api';
 import Map from './Map';
-import { getDirections } from '../utils/utils';
 
 const MapViewer = ({ walk }) => {
   const [directions, setDirections] = useState(null);
@@ -8,7 +8,7 @@ const MapViewer = ({ walk }) => {
   useEffect(() => {
     (async () => {
       try {
-        const result = await getDirections(walk.rectangle);
+        const result = await googleService.getDirections(walk.rectangle);
         setDirections(result);
       } catch (error) {
         console.log('Error fetching directions:', error);

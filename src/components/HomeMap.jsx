@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import googleService from '../services/google.api';
-import { generateRectangle, getDirections } from '../utils/utils';
+import { generateRectangle } from '../utils/utils';
 import { AuthContext } from "../context/auth.context";
 import AddWalk from './AddWalk';
 import CostumDialog from './CostumDialog';
@@ -69,7 +69,7 @@ const HomeMap = () => {
     setGeneratedRect(newRect);
 
     try {
-      const directions = await getDirections(newRect);
+      const directions = await googleService.getDirections(newRect);
       setDirectionsResponse(directions);
       setWalkGenerated(true);
     } catch (error) {
