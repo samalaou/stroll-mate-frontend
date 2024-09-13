@@ -18,6 +18,7 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
     };
 
     const handleMapClick = (e) => {
+        console.log(111)
         e.stopPropagation();
         setDialogOpen(true);
     };
@@ -33,8 +34,6 @@ const WalkItem = ({ walk, onClick, onDelete }) => {
         sx={{ 
             marginBottom: 2,
             position: 'relative',
-            cursor: isOwner ? 'pointer' : 'default',
-            pointerEvents: isOwner ? 'auto' : 'none'
         }}
         >
             {walk.rectangle && walk.rectangle.length > 0 && (
